@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div
+            class="offset-md-4 col-md-4 offset-sm-3 col-sm-6 d-flex flex-column justify-content-center align-items-center"
+            style="height: 100vh;">
+            <div class="mb-4">
+                <h5>Itransition-task4</h5>
+            </div>
+            <div>
+                <a href="{{ path('app_register') }}" class="btn signup">Sign up</a>
+                <a href="{{ path('app_login') }}" class="btn signup">Sign in</a>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

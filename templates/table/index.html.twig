@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Table{% endblock %}
+
+{% block body %}
+    <div class="container" style="margin-top: 50px;">
+        <div class="row justify-content-between mb-3">
+            <div class="col-auto">
+                <a href="{{ path('app_logout') }}" class="btn btn-primary">Logout</a>
+            </div>
+            <div class="col-auto">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button id="delete_button" type="button" class="btn btn-light rounded-pill px-3" data-action="delete"
+                            style="background-color: #ffffff; border: none">
+                        <img src="{{ asset('images/table/delete.png') }}" alt="Delete">
+                    </button>
+                    <button id="block_button" type="button" class="btn btn-light rounded-pill px-3" data-action="block"
+                            style="background-color: #ffffff; border: none">
+                        <img src="{{ asset('images/table/block.png') }}" alt="Block">
+                    </button>
+                    <button id="unblock_button" type="button" class="btn btn-light rounded-pill px-3" data-action="unblock"
+                            style="background-color: #ffffff; border: none">
+                        <img src="{{ asset('images/table/unblock.png') }}" alt="Unblock">
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th><input id="selectAllCheckbox" class="PrivateSwitchBase-input css-1m9pwf3"
+                                   tabindex="-1"
+                                   type="checkbox" data-indeterminate="false" aria-label="Select all rows"></th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Last login</th>
+                        <th>Registration</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td><input class="PrivateSwitchBase-input css-1m9pwf3" tabindex="-1" type="checkbox"
+                                       data-indeterminate="false" aria-label="Select all rows"
+                                       data-user-id="{{ user.id }}"></td>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.name }}</td>
+                            <td>{{ user.email }}</td>
+                            {% if user.status == 1 %}
+                                <td>Active</td>
+                            {% else %}
+                                <td>Block</td>
+                            {% endif %}
+                            <td>{{ user.dateLastLogin ? user.dateLastLogin.format('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ user.dateRegister ? user.dateRegister.format('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="{{ asset('js/listeners.js') }}"></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
+    <script src="{{ asset('js/table.js') }}"></script>
+{% endblock %}
