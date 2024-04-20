@@ -32,7 +32,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->processRegistration($form, $entityManager, $security, $userPasswordHasher, $request);
+            return $this->processRegistration($entityManager, $form, $security, $userPasswordHasher);
         }
 
         $errors = [];
